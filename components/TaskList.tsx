@@ -18,7 +18,22 @@ export default function TaskList(){
     const [description,setdDscription] = useState('')
 
     const [id, setId] = useState<Number>(1)
-    
+     useEffect(()=>{
+        (async () =>{
+            try{
+        console.log(tasks, ':Taskit:muistissa')
+                const json = await AsyncStorage.getItem(KEY)
+                if(json)setTasks(JSON.parse(json))
+            }catch(e)
+            {
+                console.log(e)
+            }
+        })
+       },[])
+       useEffect(()=>{
+        console.log(tasks, ':Taskit:')
+        AsyncStorage.setItem(KEY,JSON.stringify(tasks))
+       },[tasks,setTasks])
    
     const addTask=()=>{
         if(taskTitle.trim() && description.trim()){
@@ -30,22 +45,6 @@ export default function TaskList(){
         setdDscription('')
         
         }
-       useEffect(()=>{
-        (async () =>{
-            try{
-                const json = await AsyncStorage.getItem(KEY)
-                if(json)setTasks(JSON.parse(json))
-            }catch(e)
-            {
-                console.log(e)
-            }
-        })
-       },[])
-       useEffect(()=>{
-        AsyncStorage.setItem(KEY,JSON.stringify(tasks))
-       },[tasks])
-        
-     
     }
     return(
         <View style={styles.container}>
