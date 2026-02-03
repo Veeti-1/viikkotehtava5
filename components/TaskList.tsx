@@ -20,7 +20,7 @@ export default function TaskList(){
     const [description,setdDscription] = useState('')
     
     
-    const [id, setId] = useState<Number>(1)
+    const [id, setId] = useState<Number>(tasks.length)
      useEffect(()=>{
         loadSavedTasks();
        },[])
@@ -70,7 +70,7 @@ export default function TaskList(){
                 <Button
                 title="Add" 
                 onPress={()=>{
-                    setId(tasks.length +1)
+                    setId(+1)
                     addTask()
                 }}
                 />
