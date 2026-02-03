@@ -2,28 +2,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View,Button, Pressable, ScrollView } from 'react-native';
 import { SwipeListView } from 'react-native-swipe-list-view';
-
+import Row from './Row';
 
 const KEY = 'TASK_LIST_ITEMS';
 
 
-interface Task{
+export interface Task{
   id:string;
   name:string;
   description:string;
   
  
 }
-const Row = ({ id, name, description }: Task) => (
-<View >
 
-<View style={styles.list}>
-<Text style={styles.text}>{id}</Text>
-<Text style={styles.text}>{name}</Text>
-<Text style={styles.text}>{description}</Text>
-</View>
-</View>
-);
 export default function TaskList(){
     const [tasks,setTasks] = useState<Task[]>([])
     const [taskTitle,setTaskTitle] = useState('')
@@ -91,6 +82,7 @@ export default function TaskList(){
             </View>
                 <ScrollView>
                    {tasks.map((item)=>(
+                    
                     <Row
                     id={item.id}
                     name={item.name}
@@ -134,7 +126,5 @@ paddingRight: 20,
   text:{
 
   },
-  textCliked:{
-    textDecorationLine:'line-through'
-  }
+  
 });
