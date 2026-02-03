@@ -5,7 +5,7 @@ export default function App() {
   
   return (
     <View style={styles.container}>
-    
+      <Text>Tasks</Text>
      <View style={styles.listContainer}>
      <TaskList/>
 
