@@ -16,23 +16,25 @@ export default function TaskList(){
     const [tasks,setTasks] = useState<Task[]>([])
     const [taskTitle,setTaskTitle] = useState('')
     const [description,setdDscription] = useState('')
-
+    
     const [id, setId] = useState<Number>(1)
      useEffect(()=>{
-        (async () =>{
-            try{
-        console.log(tasks, ':Taskit:muistissa')
-                const json = await AsyncStorage.getItem(KEY)
-                if(json)setTasks(JSON.parse(json))
+        loadSavedTasks();
+       },[])
+       const loadSavedTasks =async()=>{
+         try{
+            console.log(tasks, ':Taskit:muistissa')
+            const json = await AsyncStorage.getItem(KEY)
+            if(json)setTasks(JSON.parse(json))
             }catch(e)
             {
-                console.log(e)
+            console.log(e)
             }
-        })
-       },[])
+       }
        useEffect(()=>{
-        console.log(tasks, ':Taskit:')
-        AsyncStorage.setItem(KEY,JSON.stringify(tasks))
+    
+         AsyncStorage.setItem(KEY,JSON.stringify(tasks))
+       
        },[tasks,setTasks])
    
     const addTask=()=>{
