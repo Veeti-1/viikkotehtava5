@@ -24,6 +24,7 @@ export default function TaskList(){
      useEffect(()=>{
         loadSavedTasks();
        },[])
+     
        const loadSavedTasks =async()=>{
          try{
             console.log(tasks, ':Taskit:muistissa')
@@ -79,20 +80,27 @@ export default function TaskList(){
                 />
             </View>
             
-               
+
                 <SwipeListView
                 data={tasks}
                 keyExtractor={item=>item.id}
                 renderItem={({item})=>(
                 
                 <View style={styles.list}>
-                    <Text style={[{textDecorationLine: done ? 'none':'line-through'}]} onPress={()=>{
+                    <Text style={[{textDecorationLine: done ? 'none':'line-through'}]}>
+                        <Pressable onPress={()=>{
+                        if(!done){
                         setDone(true)
+                    }else{
+                        setDone(false)
+                    }
                     }}>
                         {item.name} id: {item.id}
                         <Text>
                         {item.description}
+                        
                     </Text>
+                    </Pressable>
                     </Text>
                     
                 </View>
