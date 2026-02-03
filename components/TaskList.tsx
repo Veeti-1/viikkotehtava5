@@ -10,7 +10,7 @@ const KEY = 'TASK_LIST_ITEMS';
 export interface Task{
   id:string;
   name:string;
-  description:string;
+
   
  
 }
@@ -18,8 +18,7 @@ export interface Task{
 export default function TaskList(){
     const [tasks,setTasks] = useState<Task[]>([])
     const [taskTitle,setTaskTitle] = useState('')
-    const [description,setdDscription] = useState('')
-    const[done,setDone] = useState(false)
+  
     let id = tasks.length -1 + AsyncStorage.getAllKeys.length - 1;
   
      useEffect(()=>{
@@ -28,7 +27,7 @@ export default function TaskList(){
      
        const loadSavedTasks =async()=>{
          try{
-            console.log(tasks, ':Taskit:muistissa')
+           
             const json = await AsyncStorage.getItem(KEY)
             if(json)setTasks(JSON.parse(json))
             id=AsyncStorage.getAllKeys.length
@@ -45,14 +44,14 @@ export default function TaskList(){
    
     const addTask=()=>{
         id++
-        if(taskTitle.trim() && description.trim()){
+        if(taskTitle.trim()){
             setTasks(prev =>[
             ...prev,
-            {id:id.toString(), name:taskTitle, description:description}
+            {id:id.toString(), name:taskTitle,}
         ])
        
         setTaskTitle('')
-        setdDscription('')
+        
         }
       
     }
@@ -66,12 +65,7 @@ export default function TaskList(){
                 onChangeText={setTaskTitle}
                 placeholder='Add new Task'
                 />
-                <TextInput
-                style={styles.input}
-                value={description}
-                onChangeText={setdDscription}
-                placeholder='description'
-                />
+              
                 <Button
                 title="Add" 
                 onPress={()=>{
@@ -80,19 +74,27 @@ export default function TaskList(){
                 }}
                 />
             </View>
+              
                 <ScrollView>
+                  
                    {tasks.map((item)=>(
-                    
+                    <Pressable
+                    onPress={()=>{
+
+                    }}
+                    >
                     <Row
+                    key={item.id}
                     id={item.id}
                     name={item.name}
-                    description={item.description}
+                   
+                    
                     />
+                    </Pressable>
                    ))}
+                   
                 </ScrollView>
                 </View>
-                
-            
     
     );
 }
