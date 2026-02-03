@@ -18,8 +18,8 @@ export default function TaskList(){
     const [tasks,setTasks] = useState<Task[]>([])
     const [taskTitle,setTaskTitle] = useState('')
     const [description,setdDscription] = useState('')
-    
-    let id = 0;
+    const[done,setDone] = useState(false)
+    let id = tasks.length -1 + AsyncStorage.getAllKeys.length - 1;
   
      useEffect(()=>{
         loadSavedTasks();
@@ -37,8 +37,8 @@ export default function TaskList(){
        }
        useEffect(()=>{
     
-         AsyncStorage.setItem(KEY,JSON.stringify(tasks))
-       
+        AsyncStorage.setItem(KEY,JSON.stringify(tasks))
+    
        },[tasks,setTasks])
    
     const addTask=()=>{
@@ -86,9 +86,8 @@ export default function TaskList(){
                 renderItem={({item})=>(
                 
                 <View style={styles.list}>
-                    <Text style={styles.text} onPress={()=>{
-                        
-                        styles.textCliked
+                    <Text style={[{textDecorationLine: done ? 'none':'line-through'}]} onPress={()=>{
+                        setDone(true)
                     }}>
                         {item.name} id: {item.id}
                         <Text>
