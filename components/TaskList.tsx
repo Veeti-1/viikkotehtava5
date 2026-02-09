@@ -3,58 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View,Button, Pressable, ScrollView } from 'react-native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import Row from './Row';
+import { Task } from './hooks/CustomHooks'
+import {useTodos} from './hooks/CustomHooks'
 
-const KEY = 'TASK_LIST_ITEMS';
 
 
-export interface Task{
-  id:string;
-  name:string;
 
-  
- 
-}
 
 export default function TaskList(){
-    const [tasks,setTasks] = useState<Task[]>([])
-    const [taskTitle,setTaskTitle] = useState('')
-  const [done,setDone] = useState(false);
-    let id = tasks.length -1 + AsyncStorage.getAllKeys.length - 1;
-  
-     useEffect(()=>{
-        loadSavedTasks();
-       },[])
-     
-       const loadSavedTasks =async()=>{
-         try{
-           
-            const json = await AsyncStorage.getItem(KEY)
-            if(json)setTasks(JSON.parse(json))
-            id=AsyncStorage.getAllKeys.length
-            }catch(e)
-            {
-            console.log(e)
-            }
-       }
-       useEffect(()=>{
-    
-        AsyncStorage.setItem(KEY,JSON.stringify(tasks))
-    
-       },[tasks,setTasks])
-   
-    const addTask=()=>{
-        id++
-        if(taskTitle.trim()){
-            setTasks(prev =>[
-            ...prev,
-            {id:id.toString(), name:taskTitle,}
-        ])
-       
-        setTaskTitle('')
-        
-        }
-      
-    }
+    const {tasks, addTask,handleDelete} = useTodos()
+    const [taskTitle,setTaskTitle] = useState('')    
     return(
         <View style={styles.container}>
             <View style={styles.inputContainer}>
@@ -71,8 +29,8 @@ export default function TaskList(){
                <Button
                 title="Save" 
                 onPress={()=>{
-                    
-                    addTask()
+                    addTask(taskTitle)
+                    setTaskTitle('')
                 }}
                 
                 />
@@ -83,16 +41,20 @@ export default function TaskList(){
                 <ScrollView>
                   
                    {tasks.map((item)=>(
-                    
-                    
+                    <>
+                   
                     <Row
                     key={item.id}
                     id={item.id}
-                    name={item.name}
-                   
-                    
+                    name={item.name}            
                     />
-                    
+                     <Button
+                     title='delete'
+                     onPress={()=>{
+                      handleDelete(item.id)
+                     }}
+                    />
+                   </>
                    ))}
                    
                 </ScrollView>
@@ -103,23 +65,20 @@ export default function TaskList(){
 const styles = StyleSheet.create({
   container: {
     marginTop:50,
-    
     backgroundColor: '#fff',
-    
-    
   },
   list:{
-backgroundColor: '#ffffffff',
-borderBottomWidth: 1,
-borderColor: '#ffffffff',
-padding: 16,
+    backgroundColor: '#ffffffff',
+    borderBottomWidth: 1,
+    borderColor: '#ffffffff',
+    padding: 16,
   },
   rowBack: {
-backgroundColor: '#ffffffff',
-flex: 1,
-alignItems: 'flex-end',
-justifyContent: 'center',
-paddingRight: 10,
+    backgroundColor: '#ffffffff',
+    flex: 1,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    paddingRight: 10,
   },
   input:{
     margin:5,
