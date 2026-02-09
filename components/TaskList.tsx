@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View,Button, Pressable, ScrollView } from 'react-native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import Row from './Row';
-import { Task } from './hooks/CustomHooks'
-import {useTodos} from './hooks/CustomHooks'
+import { Task } from '../hooks/CustomHooks'
+import {useTodos} from '../hooks/CustomHooks'
 
 
 

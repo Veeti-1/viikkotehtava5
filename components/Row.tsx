@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View,Button, Pressable, ScrollView } from 'react-native';
 
-import {Task} from './hooks/CustomHooks'
+import {Task} from '../hooks/CustomHooks'
 export default function Row ({ id, name }: Task){
   const [done,setDone] = useState(false);
 
