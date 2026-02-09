@@ -27,9 +27,8 @@ const reducer = (state: Task[], action: TaskActions): Task[] => {
 };
 
 export const useTodos=()=>{
-    const [state, dispatch] = useReducer(reducer, initialTasks);
+    const [tasks, dispatch] = useReducer(reducer, initialTasks);
    
-     const [tasks,setTasks] = useState<Task[]>([])
 
       let id = tasks.length -1;
     const handleDelete = (id: string) => {
