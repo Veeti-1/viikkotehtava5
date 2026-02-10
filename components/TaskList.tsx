@@ -18,48 +18,38 @@ export default function TaskList(){
     const {tasks, addTask,handleDelete} = useTodos()
     const [taskTitle,setTaskTitle] = useState('')    
     return(
-        <View style={styles.container}>
-            <View style={styles.inputContainer}>
-              <View>
-                <TextInput
-                
-                style={styles.input}
-                value={taskTitle}
-                onChangeText={setTaskTitle}
-                placeholder='Add new Task'
-                />
-                </View>
-                <View>
-               <Button
-                title="Save" 
-                onPress={()=>{
-                    addTask(taskTitle)
-                    setTaskTitle('')
-                }}
-                
-                />
-                </View>
-               
-            </View>
-              
-                <ScrollView>
-                  
-                   {tasks.map((item)=>(
-                    
-                   
-                    <Row
-                    key={item.id}
-                    id={item.id}
-                    name={item.name}
-                    onDelete={handleDelete}            
-                    />
-                  
-                   ))}
-                   
-                </ScrollView>
-                </View>
+      <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <View>
+            <TextInput
+              style={styles.input}
+              value={taskTitle}
+              onChangeText={setTaskTitle}
+              placeholder='Add new Task'
+              />
+          </View>
+            <View>
+              <Button
+              title="Save" 
+              onPress={()=>{
+                addTask(taskTitle)
+                setTaskTitle('')
+              }}/>
+            </View> 
+        </View>
+          <ScrollView>
+            {tasks.map((item)=>(        
+              <Row
+              key={item.id}
+              id={item.id}
+              name={item.name}
+              onDelete={handleDelete}            
+              />
+              ))}     
+          </ScrollView>
+      </View>
     
-    );
+  );
 }
 const styles = StyleSheet.create({
   container: {

@@ -17,7 +17,7 @@ export interface Task{
 function reducer(state: Task[], action: TaskActions): Task[] {
     switch(action.type){
         case 'DELETE':
-           return state = state.filter(item=> item.id !== action.id)
+           return state.filter(item=> item.id !== action.id)
         case 'ADD':
             return [...state, action.task];
         default:
