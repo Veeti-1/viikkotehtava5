@@ -3,9 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TextInput, View,Button, Pressable, ScrollView } from 'react-native';
 import {useTodos} from '../hooks/CustomHooks'
 import {Task} from '../hooks/CustomHooks'
-export default function Row ({ id, name }: Task){
+import { TaskProps } from './TaskList';
+
+
+export default function Row ({ id, name ,onDelete}:TaskProps){
   const [done,setDone] = useState(false);
-   const {handleDelete} = useTodos()
+  
  
 return(
   <View>
@@ -25,7 +28,7 @@ return(
         <Button
         title='Delete'
         onPress={()=>{
-          handleDelete(id)
+          onDelete(id)
         }}
         />
       </View>

@@ -6,7 +6,11 @@ import Row from './Row';
 import { Task } from '../hooks/CustomHooks'
 import {useTodos} from '../hooks/CustomHooks'
 
-
+export interface TaskProps{
+  id:string;
+  name:string;
+  onDelete:(id:string) => void;
+}
 
 
 
@@ -46,7 +50,8 @@ export default function TaskList(){
                     <Row
                     key={item.id}
                     id={item.id}
-                    name={item.name}            
+                    name={item.name}
+                    onDelete={handleDelete}            
                     />
                   
                    ))}
