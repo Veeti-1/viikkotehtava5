@@ -18,8 +18,7 @@ export interface Task{
 const reducer = (state: Task[], action: TaskActions): Task[] => {
     switch(action.type){
         case 'DELETE':
-            delete state[Number(action.id)]
-            return state
+           return state.splice(Number(action.id))
         case 'ADD':
             return [...state, action.task];
         default:
