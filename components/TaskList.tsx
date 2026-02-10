@@ -41,20 +41,14 @@ export default function TaskList(){
                 <ScrollView>
                   
                    {tasks.map((item)=>(
-                    <>
+                    
                    
                     <Row
                     key={item.id}
                     id={item.id}
                     name={item.name}            
                     />
-                     <Button
-                     title='delete'
-                     onPress={()=>{
-                      handleDelete(item.id)
-                     }}
-                    />
-                   </>
+                  
                    ))}
                    
                 </ScrollView>

@@ -13,12 +13,13 @@ export interface Task{
   
  
 }
-const initialTasks: Task[] = [];
+
 
 const reducer = (state: Task[], action: TaskActions): Task[] => {
     switch(action.type){
         case 'DELETE':
-            return state.filter(task => task.id !== action.id);
+            delete state[Number(action.id)]
+            return state
         case 'ADD':
             return [...state, action.task];
         default:
@@ -27,7 +28,7 @@ const reducer = (state: Task[], action: TaskActions): Task[] => {
 };
 
 export const useTodos=()=>{
-    const [tasks, dispatch] = useReducer(reducer, initialTasks);
+    const [tasks, dispatch] = useReducer(reducer, []);
    
 
       let id = tasks.length -1;
