@@ -14,7 +14,7 @@ export interface Task{
 }
 
 
-const reducer = (state: Task[], action: TaskActions): Task[] => {
+function reducer(state: Task[], action: TaskActions): Task[] {
     switch(action.type){
         case 'DELETE':
            return state = state.filter(item=> item.id !== action.id)
@@ -39,6 +39,7 @@ export const useTodos=()=>{
             const newTask:Task={
             id:id.toString(), name:title
         }
+        
         dispatch({type: "ADD", task:newTask})
         
         }
