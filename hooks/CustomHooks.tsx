@@ -35,14 +35,14 @@ export const useTodos=()=>{
     }
     const addTask=(title:string)=>{
         id++
-        if(!title.trim()){
-         return;   
-        
-        }
-        const newTask:Task={
+        if(title.trim()){
+            const newTask:Task={
             id:id.toString(), name:title
         }
         dispatch({type: "ADD", task:newTask})
+        
+        }
+        
       
     }
 
