@@ -19,7 +19,7 @@ function reducer(state: Task[], action: TaskActions): Task[] {
         case 'DELETE':
            return state = state.filter(item=> item.id !== action.id)
         case 'ADD':
-            [...state, action.task];
+            return [...state, action.task];
         default:
             return state;
     }
@@ -31,16 +31,12 @@ export const useTodos=()=>{
 
       let id = tasks.length -1;
     const handleDelete = (id: string) => {
-        dispatch({type:"DELETE", id: id});
+        dispatch({type:"DELETE", id});
     }
     const addTask=(title:string)=>{
         id++
         if(title.trim()){
-            const newTask:Task={
-            id:id.toString(), name:title
-        }
-        
-        dispatch({type: "ADD", task:newTask})
+            dispatch({type: "ADD", task:{id:id.toString(), name:title}})
         
         }
         
