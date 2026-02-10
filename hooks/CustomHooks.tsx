@@ -7,10 +7,9 @@ type TaskActions=
 
 
 export interface Task{
-  id:string;
-  name:string;
-
-  
+    id:string;
+    name:string;
+     
  
 }
 
@@ -18,9 +17,9 @@ export interface Task{
 const reducer = (state: Task[], action: TaskActions): Task[] => {
     switch(action.type){
         case 'DELETE':
-           return state.splice(Number(action.id))
+           return state = state.filter(item=> item.id !== action.id)
         case 'ADD':
-            return [...state, action.task];
+            [...state, action.task];
         default:
             return state;
     }
@@ -33,16 +32,17 @@ export const useTodos=()=>{
       let id = tasks.length -1;
     const handleDelete = (id: string) => {
         dispatch({type:"DELETE", id: id});
-    };
+    }
     const addTask=(title:string)=>{
         id++
-        if(title.trim()){
-            const newTask:Task={
-            id:id.toString(), name:title
-            }
-            dispatch({type: "ADD", task:newTask})
+        if(!title.trim()){
+         return;   
         
         }
+        const newTask:Task={
+            id:id.toString(), name:title
+        }
+        dispatch({type: "ADD", task:newTask})
       
     }
 

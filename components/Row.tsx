@@ -16,8 +16,10 @@ return(
       else if(done === true){
         setDone(false)
       }
-      }}>
-
+      }}
+      
+      >
+      
       <View style={styles.list}>
         <Text style={[{textDecorationLine: done ? 'line-through':'none'}]}>{name}</Text>
         <Button
